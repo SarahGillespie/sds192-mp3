@@ -84,7 +84,7 @@ leaflet() %>%
   addPolylines(data = pluck(macleish_layers, "streams"), 
                weight = 1, color = "black") %>%
   addPolygons(data = stream_buffer) %>% 
-  addMarkers(data = my_points, icon = new_campsite_icon)
+  addMarkers(data = my_points, icon = new_campsite_icon, popup = "Proposed campsite")
 
   
 ```
