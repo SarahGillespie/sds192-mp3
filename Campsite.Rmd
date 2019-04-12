@@ -24,18 +24,29 @@ library(lwgeom)
 
 ```{r Code, message=FALSE}
 
-my_points <- tribble(
-  ~point, ~lat, ~lon,
-  "A",  42.448483, -72.675119)
+new_campsite <- tribble(
+  ~lat, ~lon,
+  42.448483, -72.675119)
+
+existing_campsites <- tribble(
+  ~lat, ~lon,
+   42.450933, -72.677843,
+   42.458811, -72.680851)
 
 #icons from https://www.nps.gov/maps/tools/symbol-library/
 
 new_campsite_icon <- icons(
+  iconUrl = "https://www.nps.gov/maps/tools/symbol-library/assets/img/campground-black-22.svg")
+
+existing_campsite_icon <- icons(
   iconUrl = "https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg")
 
 stream_x_icon <- icons(
-  iconUrl = "https://www.nps.gov/maps/tools/symbol-library/assets/img/wading-black-22.svg"
-)
+  iconUrl = "https://www.nps.gov/maps/tools/symbol-library/assets/img/wading-black-22.svg")
+
+html_legend <- "<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campground-black-22.svg'>New campsite<br/>
+<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg'>Existing campsite<br/>
+<img src = 'https://www.nps.gov/maps/tools/symbol-library/assets/img/wading-black-22.svg'>Stream crossing"
 
 macleish_layers %>%
   pluck("trails") %>%
@@ -71,7 +82,8 @@ leaflet() %>%
   addTiles() %>%
   addPolylines(data = pluck(macleish_layers, "streams")) %>%
   addPolylines(data = pluck(macleish_layers, "trails"), color = "brown") %>%
-  addMarkers(data = st_cast(trail_stream_xings, "POINT"), icon = stream_x_icon, popup = ~name)
+  addMarkers(data = st_cast(trail_stream_xings, "POINT"), icon = stream_x_icon, popup = ~name)%>%
+  addControl(html = html_legend, position = "bottomleft")
 
 stream_buffer <- macleish_layers %>%
   pluck("streams") %>%
@@ -84,7 +96,11 @@ leaflet() %>%
   addPolylines(data = pluck(macleish_layers, "streams"), 
                weight = 1, color = "black") %>%
   addPolygons(data = stream_buffer) %>% 
-  addMarkers(data = my_points, icon = new_campsite_icon, popup = "Proposed campsite")
+  addMarkers(data = new_campsite, icon = new_campsite_icon, popup = "Proposed campsite") %>%
+  addMarkers(data = existing_campsites, icon = existing_campsite_icon, popup = "Existing campsite")%>%
+  addControl(html = html_legend, position = "bottomleft")
+
+
 
   
 ```
