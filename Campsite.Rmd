@@ -1,6 +1,6 @@
 ---
 title: "Campsite"
-author: "Sarah Gillespie, Berry Williams, Eva Putman"
+author: "Sarah Gillespie, Berry Williams, Eva Putnam"
 date: "2019-05-15"
 output:
   html_document:
