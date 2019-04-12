@@ -41,7 +41,7 @@ new_campsite_icon <- icons(
 existing_campsite_icon <- icons(
   iconUrl = "https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg")
 
-html_legend <- "<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campground-black-22.svg'>New campsite<br/>
+html_legend <- "<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campground-black-22.svg'>Proposed campsite<br/>
 <img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg'>Existing campsite"
 
 macleish_layers %>%
