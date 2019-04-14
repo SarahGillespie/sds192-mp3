@@ -11,8 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
 ```{r StartingItems, message=FALSE, warning = FALSE}
 library(tidyverse)
 library(macleish)
@@ -22,6 +20,16 @@ library(dplyr)
 library(lwgeom)
 devtools::install_github("benmarwick/wordcountaddin")
 ```
+
+> Word count: `r wordcountaddin::word_count()`
+
+##### Smith College’s Ada and Archibald Macleish Field Station encompasses 243 acres in the hills of Whately Massachusetts. It facilitates student and faculty environmental research, outdoor education, wildlife habitat protection and outdoor recreational space.  The space was dedicated for this purpose in 2008, in honor of Ada and Archibald Macleish, who were close friends of the school’s first woman president and had a passion for the environment. Macleish hosts a wide variety of student research and involvement in ongoing projects, including mushroom inoculation, statistics classes, and even choreography. The Macleish property has approximately six miles of hiking trails and two campsites, built primarily by student employees and volunteers.
+
+##### For our mini project we decided to find an area to build a third campsite. We indicated on our map where it would be located. Our site would be in the southeast corner of the property. We are proposing two options in the same region. The northern site could be accessed by extending the south western tip of the Orange Newt Trail. The location is in the southern part of the area and would be closer to the parking area, but would require building about half a mile of new trail from the central parking area. We chose this region of Macleish for several reasons. Either site would be a roughly half a mile away from the parking area and in close proximity of a stream (as shown on our map). The region has relatively flat topography and is in an isolated part of the property far from the other sites, roadways or other human activity.  We have provided two options in the same general area for several reasons. The two sites would require the same funding for the campsite itself, but we offer two different lengths of trail required to reach the locations depending on budgets.  Although the locations are approximately the same distance from the parking area, the southern site would have a more direct route. We also considered the possibility that the region could partially be on a flood plain and wanted to have more than one option in the same general remote area.
+
+##### According to Reid Bertone-Johnson, landscape studies lecturer and field station manager at Macleish, there are many factors to take into consideration when building a new campsite or sections of trail. Campsites vary in degree of development and complexity. The construction of all campsites requires some tree pruning and work removing rocks and downed trees. The group site at Macleish includes a shelter and was built using a kit, which cost $3,000. The completion of this project took about one semester of intermittent work by a team of 3-4 students and two staff members.  Students are paid $12/hour for this work.  If we opted for a less developed campsite, the construction would take about a week and would likely include tent platforms and a picnic table. If budgeting is an issue, this may be the more practical option.  Either of these options would require little to no regular maintenance.
+
+##### Our proposal includes the extension of an existing trail. Labor makes up the majority of the costs associated with trail building as well as tools and materials for bridges. During the summer of 2018, a mile of trail was built as Macleish in 10 weeks.  During this project, three interns were paid to work about 20 hours per week in addition to one or two regular staff and one day of volunteer work by the entire Botanical Garden Crew (Bertone-Johnson, 2019). Environmental impact that must be considered before building at the Macleish field station.  More than 200 of the 260 acres of the field station are in “permanent Conservation Restriction” held by the Kestrel Land Trust. Any development work on new trail or campsites in any of those protected area must be reviewed and approved by them before moving forward with the project. The major roadblocks for these types of projects are finding time to prioritize the work and working with all of the stakeholders (outdoor programs, researchers, faculty, staff…) to find sites and trail locations that provide desired amenities or access without interfering with research or disturbing ongoing projects.  Our proposed site locations would address all of these issues and fit the criteria given.  We recommend that the Macleish management consider our proposed locations for their next campsite.
 
 ```{r Code, message=FALSE, warning = FALSE}
 
