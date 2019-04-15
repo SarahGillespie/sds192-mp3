@@ -78,12 +78,19 @@ stream_buffer <- macleish_layers %>%
   st_buffer(dist = 5) %>%
   st_transform(4326)
 
+contours_buffer <- macleish_layers %>%
+  pluck("contours_3m") %>%
+  st_transform(proj4_aea) %>%
+  st_buffer(dist = .1) %>%
+  st_transform(4326)
+
 leaflet() %>%
   addTiles() %>%
   addPolylines(data = pluck(macleish_layers, "streams"), 
                weight = 1, color = "black") %>%
   addPolygons(data = stream_buffer) %>% 
   addPolylines(data = pluck(macleish_layers, "trails"), color = "brown") %>%
+  addPolylines(data = pluck(macleish_layers, "contours_3m"), color = "green") %>%
   addMarkers(data = new_campsite, icon = new_campsite_icon, popup = "Proposed campsites") %>%
   addMarkers(data = existing_campsites, icon = existing_campsite_icon, popup = ~name) %>%
   addControl(html = html_legend, position = "bottomleft")
