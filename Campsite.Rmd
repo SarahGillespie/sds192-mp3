@@ -45,20 +45,11 @@ new_campsite_icon <- icons(
 existing_campsite_icon <- icons(
   iconUrl = "https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg")
 
+
+
 html_legend <- "<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campground-black-22.svg'>Proposed campsite<br/>
 <img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg'>Existing campsite"
 
-macleish_layers %>%
-  pluck("trails") %>%
-  st_length()
-
-trails <- macleish_layers %>%
-  pluck("trails") %>%
-  mutate(computed_length = st_length(geometry))
-
-macleish_layers %>%
-  pluck("boundary") %>%
-  st_area()
 
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 
@@ -66,16 +57,11 @@ boundaries_aea <- macleish_layers %>%
   pluck("boundary") %>%
   st_transform(proj4_aea)
 
-macleish_layers %>%
-  pluck("trails") %>%
-  st_intersects(pluck(macleish_layers ,"streams"))
-
 leaflet() %>%
   addTiles() %>%
-  addPolylines(data = pluck(macleish_layers, "contours_3m"), weight = 2, color = "green") %>%
+  addPolylines(data = pluck(macleish_layers, "contours_3m"), weight = 1, color = "green") %>%
   addPolylines(data = pluck(macleish_layers, "streams"), 
-               weight = 1, color = "black") %>%
-  addPolygons(data = stream_buffer) %>% 
+               weight = 2, color = "blue") %>%
   addPolylines(data = pluck(macleish_layers, "trails"), color = "brown") %>%
   addMarkers(data = new_campsite, icon = new_campsite_icon, popup = "Proposed campsites") %>%
   addMarkers(data = existing_campsites, icon = existing_campsite_icon, popup = ~name) %>%
