@@ -23,6 +23,8 @@ library(wordcountaddin)
 
 > Word count: `r wordcountaddin::word_count()`
 
+### Is school too in-tents and unbearable? Campsite recommendations:
+
 ##### Smith College’s [Ada and Archibald Macleish Field Station](https://smithceeds.wordpress.com/tag/field-station/) encompasses 243 acres in the hills of Whately Massachusetts. It facilitates student and faculty environmental research, outdoor education, wildlife habitat protection and outdoor recreational space.  The space was dedicated for this purpose in 2008, in honor of Ada and Archibald Macleish, who were close friends of the school’s first woman president and had a passion for the environment. Macleish hosts a wide variety of student research and involvement in ongoing projects, including mushroom inoculation, statistics classes, and even [choreography](https://www.smith.edu/insight/stories/macleish_sidebar.php). The property has approximately six miles of hiking trails and two campsites, built primarily by student employees and volunteers.
 
 
