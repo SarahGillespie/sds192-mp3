@@ -26,7 +26,7 @@ library(wordcountaddin)
 ##### Smith College’s [Ada and Archibald Macleish Field Station](https://smithceeds.wordpress.com/tag/field-station/) encompasses 243 acres in the hills of Whately Massachusetts. It facilitates student and faculty environmental research, outdoor education, wildlife habitat protection and outdoor recreational space.  The space was dedicated for this purpose in 2008, in honor of Ada and Archibald Macleish, who were close friends of the school’s first woman president and had a passion for the environment. Macleish hosts a wide variety of student research and involvement in ongoing projects, including mushroom inoculation, statistics classes, and even [choreography](https://www.smith.edu/insight/stories/macleish_sidebar.php). The property has approximately six miles of hiking trails and two campsites, built primarily by student employees and volunteers.
 
 
-##### For our mini project we decided to find an area to build a third campsite that would fit Paul Wetzel’s criteria.  We have indicated on our map where it would be located (in the southeast corner of the property). We are proposing two options in the same general region. The northern site could be accessed by extending the south western tip of the Orange Newt Trail. Please note that the Orange Newt Trail was only build within the last couple years and is not yet included in the Macleish R package. The second location is in the southern part of the area and would be closer to the central parking lot, but would require building about half a mile of new trail.
+##### For our mini project [^1] we decided to find an area to build a third campsite that would fit Paul Wetzel’s criteria.  We have indicated on our map where it would be located (in the southeast corner of the property). We are proposing two options in the same general region. The northern site could be accessed by extending the south western tip of the Orange Newt Trail. Please note that the Orange Newt Trail was only build within the last couple years and is not yet included in the Macleish R package. The second location is in the southern part of the area and would be closer to the central parking lot, but would require building about half a mile of new trail.
 
 
 ##### We chose this region of Macleish for several reasons. Either site would be  roughly half a mile away from the parking area and in close proximity of a stream (within 200 feet). The region has relatively flat topography, in an area of black birch forest, which is different than the existing sites, it is 500 feet away from the challenge course and is in an isolated part of the property far from the other sites, roadways or other human activity.  We have provided two options in the same general area for several reasons. Although the locations are approximately the same distance from the parking area, the southern site would have a more direct route. We also considered the possibility that the region could be on a flood plain, near sensitive local populations of known plants, animals or cultural/historic locations.  These two options would allow some flexibility if any of these issues arises. Either of these options would require little to no regular maintenance once initial construction is completed.
@@ -40,7 +40,7 @@ library(wordcountaddin)
 
 
 ```{r Code, message=FALSE, warning = FALSE}
-
+# this sets up the lcoation for suggested campsites, current campsites, and the parking lot.
 new_campsite<- tribble(
   ~name, ~lat, ~lon,
   "New campsite 1", 42.448483, -72.675119,
@@ -48,21 +48,30 @@ new_campsite<- tribble(
 
 existing_campsites <- tribble(
   ~name, ~lat, ~lon,
-  "Group campsite", 42.450933, -72.677843,
-   "Remote campsite", 42.458811, -72.680851)
+  "Group campsite", 42.450976, -72.678154,
+   "Remote campsite", 42.458549, -72.679581)
 
-#icons from https://www.nps.gov/maps/tools/symbol-library/
+parkingLocation <- tribble(
+  ~name, ~lat, ~lon,
+  "Parking", 42.448013, -72.680663)
 
+#icons from https://www.nps.gov/maps/tools/symbol-library/ and their Github symbol library https://github.com/nationalparkservice/symbol-library
+
+# below names each icon
 new_campsite_icon <- icons(
   iconUrl = "campgroundLines.png")
 
 existing_campsite_icon <- icons(
   iconUrl = "campsiteNoLines.png")
 
+parking_icon <- icons(
+  iconUrl = "ParkingSymbol.png")
 
+#below creates an HTML legend
 
-html_legend <- "<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campground-black-22.svg'>Proposed campsite<br/>
-<img src='https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg'>Existing campsite"
+html_legend <- "<img src='campgroundLines.png'>Proposed campsite<br/>
+<img src='campsiteNoLines.png'>Existing campsite
+<img src='ParkingSymbol.png'>Parking"
 
 
 proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
@@ -70,6 +79,8 @@ proj4_aea <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y
 boundaries_aea <- macleish_layers %>%
   pluck("boundary") %>%
   st_transform(proj4_aea)
+
+# below puts all our layers and icons together
 
 leaflet() %>%
   addTiles() %>%
@@ -79,11 +90,11 @@ leaflet() %>%
   addPolylines(data = pluck(macleish_layers, "trails"), color = "brown") %>%
   addMarkers(data = new_campsite, icon = new_campsite_icon, popup = "Proposed campsites") %>%
   addMarkers(data = existing_campsites, icon = existing_campsite_icon, popup = ~name) %>%
+  addMarkers(data = parkingLocation, icon = parking_icon, popup = ~name) %>%
   addControl(html = html_legend, position = "bottomleft")
   
 ```
 
 
 
-^[[Github Repository](https://github.com/SarahGillespie/sds192-mp3)
-]
+[^1]: [Github Repository](https://github.com/SarahGillespie/sds192-mp3)
